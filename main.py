@@ -11,6 +11,9 @@ from langchain_chroma import Chroma                          # Store the embeddi
 
 import gradio as gr
 
+import logging
+logging.getLogger("langchain").setLevel(logging.WARNING)
+
 load_dotenv()
 
 
