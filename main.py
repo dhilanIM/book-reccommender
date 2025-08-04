@@ -11,9 +11,6 @@ from langchain_chroma import Chroma                          # Store the embeddi
 
 import gradio as gr
 
-import logging
-logging.getLogger("langchain").setLevel(logging.WARNING)
-
 load_dotenv()
 
 
@@ -26,7 +23,7 @@ books["large_thumbnail"] = np.where(books["large_thumbnail"].isna(), "cover-not-
 # Vector database
 file_path = "tagged_description.txt"
 raw_document = TextLoader(file_path, encoding="utf-8").load()
-text_splitter = CharacterTextSplitter(chunk_size=0, chunk_overlap=0, separator="\n")
+text_splitter = CharacterTextSplitter(chunk_size=9999, chunk_overlap=0, separator="\n")
 documents = text_splitter.split_documents(raw_document)
 embedding_function = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 db_books = Chroma.from_documents(documents=documents, embedding=embedding_function)
